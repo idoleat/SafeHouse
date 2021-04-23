@@ -1,0 +1,32 @@
+body {
+  background-color: #e6f3f7;
+  background-image:  linear-gradient(#a6bcca 2px, transparent 2px), linear-gradient(to right, #a6bcca 2px, #e6f3f7 2px);
+  background-size: 40px 40px;
+}
+
+.SaveHouse {
+  text-align: center;
+}
+
+.Rack {
+  display: flex;
+  background-color: #fff;
+  flex-direction: row;
+  flex-wrap: wrap;
+  place-content: flex-start;
+  align-content: flex-start;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: auto;
+
+  box-shadow: 1px 1px 10px rgba(0,0,0,.3);
+  margin: 5% 10% 30px;
+  height: 80vh;
+}
+
+.Rack .card {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    background-color: grey;
+}
