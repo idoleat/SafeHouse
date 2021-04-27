@@ -1,0 +1,14 @@
+{
+  "Bio": {
+    "type": "widget",
+    "content": "I am stupid"
+  },
+  "可悲故事集": {
+    "type": "collection",
+    "content": "_preview_"
+  },
+  "pinned item": {
+    "type": "item",
+    "content": "just content"
+  }
+}
