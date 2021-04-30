@@ -1,22 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
 
 body {
-  background-color: #e4ecf1;
-  opacity: 1;
-  background-image:  radial-gradient(#000000 0.8px, transparent 0.8px), radial-gradient(#000000 0.8px, #e4ecf1 0.8px);
-  background-size: 32px 32px;
-  background-position: 0 0,16px 16px;
+  background: -webkit-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* FF3.6+ */
+  background:     -ms-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* IE10 */
+  background:      -o-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* Opera 11.10+ */
+  background:         linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* W3C */
   font-family: 'Noto Sans TC', sans-serif;
 }
 
 .SaveHouse {
   text-align: center;
+  color: white;
+  font-size: 20px;
+  text-shadow: 3px 3px 10px 3px rgba(256, 256, 256, 0.5);
+}
+
+.profile {
+  transform: translate(all); /*???*/
+}
+
+.profile:hover {
+}
+
+.profile img{
+  position: absolute;
+  border-radius: 50%;
+  height: 10%;
+  width: height;
+  top: 3%;
+  right: 3%;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.profile img:hover{
+  background: #e0e0e0;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
 }
 
 .Rack {
-  background-color: #eceef8;
-  opacity: 1;
-  background: linear-gradient(135deg, #dde1e955 25%, transparent 25%) -16px 0/ 32px 32px, linear-gradient(225deg, #dde1e9 25%, transparent 25%) -16px 0/ 32px 32px, linear-gradient(315deg, #dde1e955 25%, transparent 25%) 0px 0/ 32px 32px, linear-gradient(45deg, #dde1e9 25%, #eceef8 25%) 0px 0/ 32px 32px;
+  background: linear-gradient(170deg, rgba(255, 255, 255,1) 0%, rgba(255, 255, 255,1) 20%, rgba(255, 255, 255,0.8) 20.1%, rgba(255, 255, 255,0.8) 40%, rgba(255, 255, 255,0.6) 40.1%, rgba(255, 255, 255,0.6) 60%, rgba(255, 255, 255,0.4) 60.1%, rgba(255, 255, 255,0.4) 80%, rgba(255, 255, 255,0.2) 80.1%, rgba(255, 255, 255,0.2) 100%);
   box-shadow: 1px 1px 10px rgba(0,0,0,.3);
 
   display: grid;
@@ -26,6 +49,7 @@ body {
   grid-auto-rows: minmax(100px, auto);
   padding: 20px;
   margin: 5% 10% 10vh;
+  border-radius: 10px;
 }
 
 .Rack a, .Rack a:link, .Rack a:visited {
