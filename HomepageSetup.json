@@ -1,14 +1,38 @@
 {
   "Bio": {
     "type": "widget",
-    "content": "I am stupid"
+    "content": "I am stupid. I like to eat poop. But I don't like poo."
   },
   "可悲故事集": {
     "type": "collection",
-    "content": "_preview_"
+    "content": "可憐之人必有可悲之處"
   },
   "pinned item": {
     "type": "item",
-    "content": "just content"
+    "content": "just content sf esfve a fe awef awef awef wef awef awef awef awe "
+  },
+  "pinned item1": {
+    "type": "item",
+    "content": "just contentawe fawef "
+  },
+  "pinned item2": {
+    "type": "item",
+    "content": "just content wef aw"
+  },
+  "pinned item3": {
+    "type": "item",
+    "content": "just contentawf aef awe fawe faf awe fawe fawef awef awef awe fawfe awef aw fawef a"
+  },
+  "pinned item4": {
+    "type": "item",
+    "content": "just contentawe awef awef awe f"
+  },
+  "pinned item5": {
+    "type": "item",
+    "content": "just contentawe wf awe"
+  },
+  "pinned item6": {
+    "type": "item",
+    "content": "just contentaw fawef awe fawe aef ae fawe fawef afw ewaef awe fawef awef awef awef awef awe awe f"
   }
 }

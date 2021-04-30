@@ -1,9 +1,5 @@
 let HomepageSetup;
 
-function setHomepageSetup(setup){
-  HomepageSetup = setup;
-}
-
 function addWidget(name, content){
   const newWidget = document.createElement('div');
   newWidget.className = 'card widget';
@@ -59,25 +55,46 @@ function addPinnedItem(name, content){
 }
 
 function FillRack(){
-  fetch("./HomepageSetup.json").then(function(response) {
-    response.text().then(function(text) {
-      setup = JSON.parse(text);
-      HomepageSetup = setup;
-      for(let key in setup){
-        let value = setup[key];
+  for(let key in HomepageSetup){
+    let value = HomepageSetup[key];
+    if(value['type'] === 'widget'){
+      addWidget(key, value['content']);
+    }
+    else if(value['type'] === 'collection'){
+      addPinnedCollection(key, value['content']);
+    }
+    else if(value['type'] === 'item'){
+      addPinnedItem(key, value['content']);
+    }
+  }
+}
 
-        if(value['type'] === 'widget'){
-          addWidget(key, value['content']);
-        }
-        else if(value['type'] === 'collection'){
-          addPinnedCollection(key, value['content']); // TEMP
-        }
-        else if(value['type'] === 'item'){
-          addPinnedItem(key, value['content']); // TEMP
-        }
-      }
-    });
+function GetHomepageSetup(callback){
+  fetch("./HomepageSetup.json").then(function(response) {
+    return response.json();
+  }).then(function(json){
+    HomepageSetup = json;
+    if(callback != undefined) callback();
+  }).catch(function(error){
+    alert('Lost the way to your save house :(( \n' + error);
   });
 }
 
-FillRack();
+function SetHomepageSetup(){
+  fetch('./HomepageSetup.json', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(HomepageSetup),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success storing homepage setup:', data);
+  })
+  .catch((error) => {
+    console.error('Error storing homepage setup:', error);
+  });
+}
+
+GetHomepageSetup(FillRack);
