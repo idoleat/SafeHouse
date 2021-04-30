@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
 
 body {
+  /*May be #1f303c instead of #16222A?*/
   background: -webkit-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* Chrome 10+, Saf5.1+ */
   background:    -moz-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* FF3.6+ */
   background:     -ms-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* IE10 */
@@ -68,7 +69,7 @@ body {
 }
 
 .widget {
-  background-color: rgba(0, 0, 0, 0.27);
+  background-color: rgba(0, 0, 0, 0.35);
 
 }
 
@@ -78,19 +79,19 @@ body {
 }
 
 .item {
-  background-color: rgba(256, 256, 256, 0.5);
+  background-color: rgba(256, 256, 256, 0.7);
 }
 
 .item .seperator {
-  background-color: rgb(237, 31, 46);
+  background-color: rgb(212, 83, 93);
   padding: 1%;
 }
 
 .collection {
-  background-color: rgba(256, 256, 256, 0.5);
+  background-color: rgba(256, 256, 256, 0.7);
 }
 
 .collection .seperator {
-  background-color: rgb(31, 99, 237);
+  background-color: rgb(84, 121, 196);
   padding: 1%;
 }
