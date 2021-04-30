@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
 
 body {
-  /*background-color: #e6f3f7;
-  background-image:  linear-gradient(#a6bcca 2px, transparent 2px), linear-gradient(to right, #a6bcca 2px, #e6f3f7 2px);
-  background-size: 40px 40px;*/
+  background-color: #e4ecf1;
+  opacity: 1;
+  background-image:  radial-gradient(#000000 0.8px, transparent 0.8px), radial-gradient(#000000 0.8px, #e4ecf1 0.8px);
+  background-size: 32px 32px;
+  background-position: 0 0,16px 16px;
   font-family: 'Noto Sans TC', sans-serif;
-
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cdefs%3E%3Cpattern id='pattern' width='15' height='15' viewBox='0 0 40 40' patternUnits='userSpaceOnUse' patternTransform='rotate(135)'%3E%3Crect id='pattern-background' width='400%25' height='400%25' fill='rgba(255, 251, 245,1)'%3E%3C/rect%3E%3Cpath fill='rgba(245, 226, 219,1)' d='M-10 30h60v4h-60zM-10-10h60v4h-60'%3E%3C/path%3E%3Cpath fill='rgba(255, 236, 204,1)' d='M-10 18h60v4h-60zM-10-22h60v4h-60z'%3E%3C/path%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23pattern)' height='100%25' width='100%25'%3E%3C/rect%3E%3C/svg%3E");
 }
 
 .SaveHouse {
@@ -14,21 +14,24 @@ body {
 }
 
 .Rack {
-
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cdefs%3E%3Cpattern id='pattern' width='100' height='100' viewBox='0 0 40 40' patternUnits='userSpaceOnUse' patternTransform='rotate(127)'%3E%3Crect id='pattern-background' width='400%25' height='400%25' fill='%2372a744'%3E%3C/rect%3E%3Cpath fill='rgba(254, 218, 200,1)' d='M0 0h40v40h-40z' filter='url(%23filter1pattern)'%3E%3C/path%3E%3Cpath fill='%23ffffff' d='M-40 0h1l12 20l-12 20h-1l12-20zM-38 0h1l12 20l-12 20h-1l12-20zM-36 0h1l12 20l-12 20h-1l12-20zM-34 0h1l12 20l-12 20h-1l12-20zM-32 0h1l12 20l-12 20h-1l12-20zM-30 0h1l12 20l-12 20h-1l12-20zM-28 0h1l12 20l-12 20h-1l12-20zM-26 0h1l12 20l-12 20h-1l12-20zM-24 0h1l12 20l-12 20h-1l12-20zM-22 0h1l12 20l-12 20h-1l12-20zM-20 0h1l12 20l-12 20h-1l12-20zM-18 0h1l12 20l-12 20h-1l12-20zM-16 0h1l12 20l-12 20h-1l12-20zM-14 0h1l12 20l-12 20h-1l12-20zM-12 0h1l12 20l-12 20h-1l12-20zM-10 0h1l12 20l-12 20h-1l12-20zM-8 0h1l12 20l-12 20h-1l12-20zM-6 0h1l12 20l-12 20h-1l12-20zM-4 0h1l12 20l-12 20h-1l12-20zM-2 0h1l12 20l-12 20h-1l12-20zM0 0h1l12 20l-12 20h-1l12-20zM2 0h1l12 20l-12 20h-1l12-20zM4 0h1l12 20l-12 20h-1l12-20zM6 0h1l12 20l-12 20h-1l12-20zM8 0h1l12 20l-12 20h-1l12-20zM10 0h1l12 20l-12 20h-1l12-20zM12 0h1l12 20l-12 20h-1l12-20zM14 0h1l12 20l-12 20h-1l12-20zM16 0h1l12 20l-12 20h-1l12-20zM18 0h1l12 20l-12 20h-1l12-20zM20 0h1l12 20l-12 20h-1l12-20zM22 0h1l12 20l-12 20h-1l12-20zM24 0h1l12 20l-12 20h-1l12-20zM26 0h1l12 20l-12 20h-1l12-20zM28 0h1l12 20l-12 20h-1l12-20zM30 0h1l12 20l-12 20h-1l12-20zM32 0h1l12 20l-12 20h-1l12-20zM34 0h1l12 20l-12 20h-1l12-20zM36 0h1l12 20l-12 20h-1l12-20zM38 0h1l12 20l-12 20h-1l12-20z'%3E%3C/path%3E%3C/pattern%3E%3Cfilter id='filter1pattern'%3E%3CfeTurbulence baseFrequency='0.1' numOctaves='2' type='fractalNoise' result='result1'%3E%3C/feTurbulence%3E%3CfeDisplacementMap in2='result1' scale='1' result='result2' xChannelSelector='R' in='SourceGraphic'%3E%3C/feDisplacementMap%3E%3CfeComposite in2='result2' in='SourceGraphic' operator='atop' result='fbSourceGraphic'%3E%3C/feComposite%3E%3C/filter%3E%3C/defs%3E%3Crect fill='url(%23pattern)' height='100%25' width='100%25'%3E%3C/rect%3E%3C/svg%3E");
-
+  background-color: #eceef8;
+  opacity: 1;
+  background: linear-gradient(135deg, #dde1e955 25%, transparent 25%) -16px 0/ 32px 32px, linear-gradient(225deg, #dde1e9 25%, transparent 25%) -16px 0/ 32px 32px, linear-gradient(315deg, #dde1e955 25%, transparent 25%) 0px 0/ 32px 32px, linear-gradient(45deg, #dde1e9 25%, #eceef8 25%) 0px 0/ 32px 32px;
   box-shadow: 1px 1px 10px rgba(0,0,0,.3);
+
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
   gap: 20px;
+  grid-auto-rows: minmax(100px, auto);
   padding: 20px;
-  height: 80vh;
   margin: 5% 10% 10vh;
 }
 
 .card {
+  border-radius: 10px;
   background-color: rgb(128, 181, 231);
-  box-shadow: 1px 1px 10px rgba(0,0,0,.3);
+  box-shadow: 0px 0px 10px rgba(0,0,0,.3);
 }
 
 .card div {
@@ -36,12 +39,12 @@ body {
 }
 
 .widget {
-  background-color: rgba(0, 0, 0, 0.32);
+  background-color: rgba(0, 0, 0, 0.27);
 
 }
 
 .widget .seperator {
-  background-color: rgba(0, 0, 0, 0.55);
+  background-color: rgb(0, 0, 0);
   padding: 1%;
 }
 
