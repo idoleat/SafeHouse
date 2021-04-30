@@ -28,6 +28,11 @@ body {
   margin: 5% 10% 10vh;
 }
 
+.Rack a, .Rack a:link, .Rack a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
 .card {
   border-radius: 10px;
   background-color: rgb(128, 181, 231);

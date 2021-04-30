@@ -1,8 +1,9 @@
 let HomepageSetup;
 
 function addWidget(name, content){
-  const newWidget = document.createElement('div');
+  const newWidget = document.createElement('a');
   newWidget.className = 'card widget';
+  newWidget.setAttribute('href', '');
 
   // I don't know it should be header or what so I use div.
   const widgetName = document.createElement('div');
@@ -19,8 +20,9 @@ function addWidget(name, content){
 }
 
 function addPinnedCollection(name, content){
-  const newCollection = document.createElement('div');
+  const newCollection = document.createElement('a');
   newCollection.className = 'card collection';
+  newCollection.setAttribute('href', '');
 
   // I don't know it should be header or what so I use div.
   const collectionName = document.createElement('div');
@@ -37,8 +39,9 @@ function addPinnedCollection(name, content){
 }
 
 function addPinnedItem(name, content){
-  const newItem = document.createElement('div');
+  const newItem = document.createElement('a');
   newItem.className = 'card item';
+  newItem.setAttribute('href', '');
 
   // I don't know it should be header or what so I use div.
   const itemName = document.createElement('div');
@@ -76,7 +79,7 @@ function GetHomepageSetup(callback){
     HomepageSetup = json;
     if(callback != undefined) callback();
   }).catch(function(error){
-    alert('Lost the way to your save house :(( \n' + error);
+    alert('Lost the way to your save house :(( \n' + error); // TEMP: need to display error directly in the web instead with a nice way like discord.
   });
 }
 
