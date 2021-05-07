@@ -83,6 +83,8 @@ function GetHomepageSetup(callback){
   });
 }
 
+/* Not allowed on most static web host.
+ */
 function SetHomepageSetup(){
   fetch('./HomepageSetup.json', {
     method: 'POST', // or 'PUT'
