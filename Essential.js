@@ -3,7 +3,7 @@ let HomepageSetup;
 function addWidget(name, content){
   const newWidget = document.createElement('a');
   newWidget.className = 'card widget';
-  newWidget.setAttribute('href', '');
+  newWidget.setAttribute('href', '#');
 
   // I don't know it should be header or what so I use div.
   const widgetName = document.createElement('div');
@@ -22,7 +22,7 @@ function addWidget(name, content){
 function addPinnedCollection(name, content){
   const newCollection = document.createElement('a');
   newCollection.className = 'card collection';
-  newCollection.setAttribute('href', '');
+  newCollection.setAttribute('href', '#');
 
   // I don't know it should be header or what so I use div.
   const collectionName = document.createElement('div');
@@ -41,7 +41,7 @@ function addPinnedCollection(name, content){
 function addPinnedItem(name, content){
   const newItem = document.createElement('a');
   newItem.className = 'card item';
-  newItem.setAttribute('href', '');
+  newItem.setAttribute('href', '#');
 
   // I don't know it should be header or what so I use div.
   const itemName = document.createElement('div');

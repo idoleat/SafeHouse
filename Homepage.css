@@ -18,6 +18,8 @@ body {
 }
 
 .profile {
+  display: flex;
+  justify-content: right;
   transform: translate(all); /*???*/
 }
 
@@ -29,14 +31,47 @@ body {
   border-radius: 50%;
   height: 10%;
   width: height;
-  top: 3%;
-  right: 3%;
+  top: 20px;
+  right: 20px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
 .profile img:hover{
   background: #e0e0e0;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+}
+
+.profile img:hover .dropdown{
+  display: block;
+}
+
+.profile .dropdown{
+  display: flex;
+  flex-flow: column;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  width: 200px;
+  padding-bottom: 3%;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.profile .dropdown .greetings{
+  margin: 10%;
+  padding-right: 50%;
+}
+
+.profile .dropdown a{
+  padding: 3% 10% 3% 10%;
+  text-decoration: none;
+  color: inherit;
+  text-shadow: rgba(256, 256, 256, 1);
+}
+
+.profile .dropdown a:hover{
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .Rack {
