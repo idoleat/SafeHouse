@@ -1,4 +1,5 @@
 let HomepageSetup;
+//let Parameters = new URLSearchParams(document.location.search);
 
 function addWidget(name, content){
   const newWidget = document.createElement('a');
@@ -22,7 +23,8 @@ function addWidget(name, content){
 function addPinnedCollection(name, content){
   const newCollection = document.createElement('a');
   newCollection.className = 'card collection';
-  newCollection.setAttribute('href', '#');
+  /*pre process name*/
+  newCollection.setAttribute('href', './Collection.html?cl=' + name);
 
   // I don't know it should be header or what so I use div.
   const collectionName = document.createElement('div');

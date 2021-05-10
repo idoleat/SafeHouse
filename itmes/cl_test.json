@@ -1,0 +1,9 @@
+{
+  "tags": ["articles", "thoughts"],
+  "name": "Stories",
+  "content": "this is a collection of funny stories.",
+  "extra": {
+    "rules": ["include cl_stories"],
+    "styles": ""
+  }
+}
