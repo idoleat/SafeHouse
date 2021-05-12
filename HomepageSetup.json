@@ -11,8 +11,8 @@
     "type": "item",
     "content": "just content sf esfve a fe awef awef awef wef awef awef awef awe "
   },
-  "pinned item1": {
-    "type": "item",
+  "test": {
+    "type": "collection",
     "content": "just contentawe fawef ",
     "style": [
       "5px",
