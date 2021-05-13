@@ -22,9 +22,9 @@ export async function get() {
     wasmUrl.toString()
   );
 
-  const result = await worker.db.query(`select * from mytable`);
+  //const result = await worker.db.query(`select * from mytable`);
 
-  console.log('So here is your SQLite query result from a static site :DD ' + JSON.stringify(result));
+  //console.log('So here is your SQLite query result from a static site :DD ' + JSON.stringify(result));
 
   return worker;
 }
