@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./src/index.ts",
+  entry: "./src/index.js",
   module: {
     rules: [
       {
@@ -13,6 +13,7 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
   },
   output: {
+    library: "SQLiteDBWorker",
     filename: "bundle.js",
   },
   devServer: {

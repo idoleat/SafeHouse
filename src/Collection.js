@@ -1,5 +1,10 @@
 let Parameters = new URLSearchParams(document.location.search);
 let CollectionName = Parameters.get('cl'); // Only the first occurence will be returned
+console.log(
+  'Once apon a day, in collection....' + JSON.stringify(
+    await SQLiteDBWorker.get().db.query(`select * from mytable`)
+  )
+);
 
 //SELECT
 //  name,

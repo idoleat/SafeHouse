@@ -6,7 +6,7 @@ const workerUrl = new URL(
 );
 const wasmUrl = new URL("sql.js-httpvfs/dist/sql-wasm.wasm", import.meta.url);
 
-async function load() {
+export async function get() {
   const worker = await createDbWorker(
     [
       {
@@ -25,6 +25,6 @@ async function load() {
   const result = await worker.db.query(`select * from mytable`);
 
   console.log('So here is your SQLite query result from a static site :DD ' + JSON.stringify(result));
-}
 
-load();
+  return worker;
+}
