@@ -1,0 +1,9 @@
+{
+  "name": "EP1",
+  "tags": ["article", "story"],
+  "content": "link to the resources, including link to others' item",
+  "extra": {
+    "rules": ["include cl_stories"],
+    "styles": ""
+  }
+}
