@@ -2,6 +2,7 @@
   "name": "Stories",
   "tags": ["articles", "thoughts"],
   "content": "this is a collection of funny stories.",
+  "resources": ["relative-path/to/resources1"],
   "extra": {
     "rules": ["include cl_stories"],
     "styles": ""
