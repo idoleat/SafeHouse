@@ -35,7 +35,7 @@ function FilterWithTags(){
   for(let key in Dictionary){
     let value = parseInt(Dictionary[key]);
     console.log('item: ' + key + ', tags: ' + value + ', filter: ' + tags);
-    if(value & tags != 0){
+    if((value&tags) != 0){
       Items.push(key);
     }
   }
