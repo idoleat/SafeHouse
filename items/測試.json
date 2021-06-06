@@ -1,0 +1,11 @@
+{
+  "tags": ["articles", "thoughts", "CL"],
+  "name": "My stories",
+  "date": "2020-10-10",
+  "content": "this is a collection of funny stories.",
+  "resources": [],
+  "extra": {
+    "rules": ["include cl_my-stories"],
+    "styles": ""
+  }
+}

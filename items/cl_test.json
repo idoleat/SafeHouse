@@ -1,8 +1,9 @@
 {
-  "name": "Stories",
   "tags": ["articles", "thoughts"],
+  "name": "Stories",
+  "date": "",
   "content": "this is a collection of funny stories.",
-  "resources": ["relative-path/to/resources1"],
+  "resources": [""],
   "extra": {
     "rules": ["include cl_stories"],
     "styles": ""

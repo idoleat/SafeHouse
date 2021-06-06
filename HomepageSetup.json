@@ -21,6 +21,10 @@
     ],
     "custom-css": ""
   },
+  "測試": {
+    "type": "collection",
+    "content": "just content wef aw"
+  },
   "pinned item2": {
     "type": "item",
     "content": "just content wef aw"
