@@ -81,7 +81,30 @@ function GetHomepageSetup(callback){
     HomepageSetup = json;
     if(callback != undefined) callback();
   }).catch(function(error){
-    alert('Lost the way to your save house :(( \n' + error); // TEMP: need to display error directly in the web instead with a nice way like discord.
+    alert('Lost the way to your save house :(( \n' + error);
+    // TEMP: need to display error directly in the web instead with a nice way like discord.
+  });
+}
+
+function GetItemTagDictionary(){
+  fetch("./ItemTagDic.json").then(function(response) {
+      return response.text();
+  }).then(function(json){
+    localStorage.setItem('ItemTagDic', json);
+  }).catch(function(error){
+    alert('Got errors while getting ItemTagDic.json');
+    // TEMP: need to display error directly in the web instead with a nice way like discord.
+  });
+}
+
+function GetTagIdDictionary(){
+  fetch("./TagIdDic.json").then(function(response) {
+      return response.text();
+  }).then(function(json){
+    localStorage.setItem('TagIdDic', json);
+  }).catch(function(error){
+    alert('Got errors while getting TagIdDic.json');
+    // TEMP: need to display error directly in the web instead with a nice way like discord.
   });
 }
 
@@ -105,3 +128,5 @@ function SetHomepageSetup(){
 }
 
 GetHomepageSetup(FillRack);
+GetItemTagDictionary();
+GetTagIdDictionary();
