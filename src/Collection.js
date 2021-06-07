@@ -3,9 +3,7 @@ let CollectionName = Parameters.get('cl'); // Only the first occurence will be r
 let Collection;
 let Dictionary = JSON.parse(localStorage.getItem('ItemTagDic'));
 let Tags = JSON.parse(localStorage.getItem('TagIdDic'));
-console.log(Tags);
-console.log(Dictionary);
-let Items = [];
+let Items;
 
 function GetCollection_json(callback){
   fetch('./items/' + CollectionName + '.json').then(function(response) {
@@ -18,31 +16,48 @@ function GetCollection_json(callback){
   });
 }
 
+/**
+ * args are the tags would like to include.
+ * Each tag is a bit mask, only one bit will be 1, others are all 0.
+ * So a filter consist of several tags are the combination masks.
+ * This function shouldn't be called directly. This is a helper function and should be called in functions with args passed. (Not sure if this is a good design)
+ * @param {aruguments} args The arguments abjects containing variable length of arguments, which are all (string)tags.
+ */
 function TagID(args){
   let TagNum = 0;
    Array.from(args).forEach( (tag)=> {
-     console.log('tag in ' + tag);
      TagNum += parseInt(Tags[tag]);
-     console.log(Tags[tag]);
-     console.log(parseInt(Tags[tag]));
    });
   return TagNum;
 }
 
-// Linear comparing
+/**
+ * Filtering out items which contain specific tags.
+ * It will iterate through all the items.
+ * Improvements needed: Maybe store ItemTagDic sorted(or B-Tree like DB) to perform faster comparism.
+ *
+ * @returns An string array of items' name
+ */
 function FilterWithTags(){
+  let items = [];
   let tags = TagID(arguments);
+
   for(let key in Dictionary){
     let value = parseInt(Dictionary[key]);
-    console.log('item: ' + key + ', tags: ' + value + ', filter: ' + tags);
-    if((value&tags) != 0){
-      Items.push(key);
+    if((value&tags) !== 0){
+      items.push(key);
     }
   }
+
+  return items;
 }
 
 GetCollection_json();
 window.onload = () => document.getElementById('cl_name').innerHTML = CollectionName
 
-FilterWithTags("articles");
+Items = FilterWithTags("articles");
 console.log(Items);
+
+//TODO: check if it's coming from homepage or not to determine fetching again or not
+//TODO: Automatic dictionaries generation
+//TODO: Fill the rack
