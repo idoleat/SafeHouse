@@ -1,5 +1,9 @@
+/* The common and basic functions and variables.
+ * Import this script as a library.
+ * Collection.js and index.js need this.
+ */
+
 let HomepageSetup;
-//let Parameters = new URLSearchParams(document.location.search);
 
 function addWidget(name, content){
   const newWidget = document.createElement('a');
@@ -59,9 +63,9 @@ function addPinnedItem(name, content){
   document.getElementById('rack').append(newItem);
 }
 
-function FillRack(){
-  for(let key in HomepageSetup){
-    let value = HomepageSetup[key];
+function FillRack(setup){
+  for(let key in setup){
+    let value = setup[key];
     if(value['type'] === 'widget'){
       addWidget(key, value['content']);
     }
@@ -74,12 +78,12 @@ function FillRack(){
   }
 }
 
-function GetHomepageSetup(callback){
+function GetHomepageSetup(cb_FillRack){
   fetch("./HomepageSetup.json").then(function(response) {
     return response.json();
   }).then(function(json){
     HomepageSetup = json;
-    if(callback != undefined) callback();
+    if(cb_FillRack != undefined) cb_FillRack(HomepageSetup);
   }).catch(function(error){
     alert('Lost the way to your save house :(( \n' + error);
     // TEMP: need to display error directly in the web instead with a nice way like discord.
@@ -126,7 +130,3 @@ function SetHomepageSetup(){
     console.error('Error storing homepage setup:', error);
   });
 }
-
-GetHomepageSetup(FillRack);
-GetItemTagDictionary();
-GetTagIdDictionary();
