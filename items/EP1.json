@@ -5,7 +5,6 @@
   "content": "link to the resources, including link to others' item",
   "resources": [],
   "extra": {
-    "rules": ["include cl_stories"],
     "styles": ""
   }
 }
