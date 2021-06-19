@@ -3,8 +3,6 @@
  * Collection.js and index.js need this.
  */
 
-let HomepageSetup;
-
 function addWidget(name, content){
   const newWidget = document.createElement('a');
   newWidget.className = 'card widget';
@@ -84,6 +82,18 @@ function GetHomepageSetup(cb_FillRack){
   }).then(function(json){
     HomepageSetup = json;
     if(cb_FillRack != undefined) cb_FillRack(HomepageSetup);
+  }).catch(function(error){
+    alert('Lost the way to your save house :(( \n' + error);
+    // TEMP: need to display error directly in the web instead with a nice way like discord.
+  });
+}
+
+function GetJson(JsonName, callback){
+  fetch('./' + JsonName + '.json').then(function(response) {
+    return response.json();
+  }).then(function(json){
+    if(callback != undefined) callback(adapter);
+    return json;
   }).catch(function(error){
     alert('Lost the way to your save house :(( \n' + error);
     // TEMP: need to display error directly in the web instead with a nice way like discord.
