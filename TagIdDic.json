@@ -1,6 +1,10 @@
 {
-  "CL": "1",
-  "articles": "2",
-  "thoughts": "4",
-  "story": "8" 
+  "CL": 1,
+  "WIDGET": 2,
+  "OTHERS1": 4,
+  "OTHERS2": 8,
+  "OTHERS3": 16,
+  "articles": 32,
+  "thoughts": 64,
+  "story": 128
 }
