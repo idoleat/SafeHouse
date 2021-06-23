@@ -22,7 +22,7 @@ function addWidget(name, content){
   document.getElementById('rack').append(newWidget);
 }
 
-function addPinnedCollection(name, content){
+function addCollection(name, content){
   const newCollection = document.createElement('a');
   newCollection.className = 'card collection';
   /*pre process name*/
@@ -42,7 +42,7 @@ function addPinnedCollection(name, content){
   document.getElementById('rack').append(newCollection);
 }
 
-function addPinnedItem(name, content){
+function addItem(name, content){
   const newItem = document.createElement('a');
   newItem.className = 'card item';
   newItem.setAttribute('href', '#');
@@ -61,6 +61,7 @@ function addPinnedItem(name, content){
   document.getElementById('rack').append(newItem);
 }
 
+// deprecated
 function FillRack(setup){
   for(let key in setup){
     let value = setup[key];
@@ -68,10 +69,10 @@ function FillRack(setup){
       addWidget(key, value['content']);
     }
     else if(value['type'] === 'collection'){
-      addPinnedCollection(key, value['content']);
+      addCollection(key, value['content']);
     }
     else if(value['type'] === 'item'){
-      addPinnedItem(key, value['content']);
+      addItem(key, value['content']);
     }
   }
 }
@@ -88,8 +89,8 @@ function GetHomepageSetup(cb_FillRack){
   });
 }
 
-function GetJson(JsonName, callback){
-  fetch('./' + JsonName + '.json').then(function(response) {
+async function GetJson(JsonName, callback){
+  await fetch('./items/' + JsonName + '.json').then(function(response) {
     return response.json();
   }).then(function(json){
     if(callback != undefined) callback(adapter);
