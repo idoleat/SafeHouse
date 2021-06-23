@@ -3,7 +3,7 @@ let CollectionName = Parameters.get('cl'); // Only the first occurence will be r
 let Collection;
 let Dictionary = JSON.parse(localStorage.getItem('ItemTagDic'));
 let Tags = JSON.parse(localStorage.getItem('TagIdDic'));
-let Items;
+let ItemNames;
 
 function GetCollection_json(callback){
   fetch('./items/' + CollectionName + '.json').then(function(response) {
@@ -52,11 +52,41 @@ function FilterWithTags(){
   return items;
 }
 
+function FillRack_(items){
+  items.forEach((item) => {
+    // use includes() to check it's collectoin or widget temperorily
+    // If an item has encoded itags stored, we can use & for faster checking
+    if(item['tags'].includes('CL')){
+      addCollection(item['name'], item['content']);
+    }
+    else if(item['tags'].includes('WIDGET')){
+      addWidget(item['name'], item['content']);
+    }
+    else{
+      addItem(item['name'], item['content']);
+    }
+  });
+}
+
+async function GetItemJson(item_names){
+  let items = [];
+  await item_names.forEach(async (item) => {
+    items.push(await GetJson(item));
+  });
+  FillRack_(items);
+  return items;
+}
+
 GetCollection_json();
 window.onload = () => document.getElementById('cl_name').innerHTML = CollectionName
 
-Items = FilterWithTags("articles");
-console.log(Items);
+ItemNames = FilterWithTags("articles");
+console.log(ItemNames);
+
+(function() {
+  let Items = await GetItemJson(ItemNames);
+})();
+
 
 //TODO: check if it's coming from homepage or not to determine fetching again or not
 //TODO: Automatic dictionaries generation
