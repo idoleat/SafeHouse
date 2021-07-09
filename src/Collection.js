@@ -38,7 +38,7 @@ function TagID(args){
  *
  * @returns An string array of items' name
  */
-function FilterWithTags(){
+function ItemsWithTags(){
   let items = [];
   let tags = TagID(arguments);
 
@@ -72,22 +72,22 @@ function FillRack_(items){
  * @param       {array} item_names [description]
  * @constructor
  */
-async function GetItemJson(item_names){
+async function GetItems_json(item_names){
   let items = [];
   for(let i=0; i<item_names.length; i++){
-    items.push(await GetJson(item_names[i]));
+    items.push(await GetItem_json(item_names[i]));
   }
   FillRack_(items);
   return items;
 }
 
-GetCollection_json();
+Collection = GetItem_json(CollectionName);
 window.onload = () => document.getElementById('cl_name').innerHTML = CollectionName
 
-ItemNames = FilterWithTags("articles");
-console.log(ItemNames);
+ItemNames = ItemsWithTags('articles');
+// 'articles' should be replaced by resolve(Collection['rules'])
 
-GetItemJson(ItemNames);
+GetItems_json(ItemNames);
 
 
 //TODO: check if it's coming from homepage or not to determine fetching again or not

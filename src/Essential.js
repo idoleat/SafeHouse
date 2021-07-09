@@ -89,7 +89,7 @@ function GetHomepageSetup(cb_FillRack){
   });
 }
 
-async function GetJson(JsonName, callback){
+async function GetItem_json(JsonName, callback){
   const response = await fetch('./items/' + JsonName + '.json');
   if(!response.ok){
     alert('Lost the way to your save house :(( \n' + error);
