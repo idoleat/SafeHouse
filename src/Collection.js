@@ -67,12 +67,16 @@ function FillRack_(items){
     }
   });
 }
-
+/**
+ * [GetItemJson description]
+ * @param       {array} item_names [description]
+ * @constructor
+ */
 async function GetItemJson(item_names){
   let items = [];
-  await item_names.forEach(async (item) => {
-    items.push(await GetJson(item));
-  });
+  for(let i=0; i<item_names.length; i++){
+    items.push(await GetJson(item_names[i]));
+  }
   FillRack_(items);
   return items;
 }
@@ -83,9 +87,7 @@ window.onload = () => document.getElementById('cl_name').innerHTML = CollectionN
 ItemNames = FilterWithTags("articles");
 console.log(ItemNames);
 
-(function() {
-  let Items = await GetItemJson(ItemNames);
-})();
+GetItemJson(ItemNames);
 
 
 //TODO: check if it's coming from homepage or not to determine fetching again or not

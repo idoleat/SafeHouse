@@ -90,15 +90,13 @@ function GetHomepageSetup(cb_FillRack){
 }
 
 async function GetJson(JsonName, callback){
-  await fetch('./items/' + JsonName + '.json').then(function(response) {
-    return response.json();
-  }).then(function(json){
-    if(callback != undefined) callback(adapter);
-    return json;
-  }).catch(function(error){
+  const response = await fetch('./items/' + JsonName + '.json');
+  if(!response.ok){
     alert('Lost the way to your save house :(( \n' + error);
-    // TEMP: need to display error directly in the web instead with a nice way like discord.
-  });
+    throw new Error('error while fetching');
+  }
+  const json = await response.json();
+  return json;
 }
 
 function GetItemTagDictionary(){
