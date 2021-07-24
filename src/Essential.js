@@ -89,6 +89,12 @@ function GetHomepageSetup(cb_FillRack){
   });
 }
 
+/**
+ * Get a item asyncronously.
+ * @param       {string}   JsonName File name, without .json
+ * @param       {Function} callback Functions to call after getting the item successfully. Json as Js object will be passed as the only argumemt.
+ * @returns Js object of the item.
+ */
 async function GetItem_json(JsonName, callback){
   const response = await fetch('./items/' + JsonName + '.json');
   if(!response.ok){
@@ -96,6 +102,7 @@ async function GetItem_json(JsonName, callback){
     throw new Error('error while fetching');
   }
   const json = await response.json();
+  if(callback !== undefined) callback(json);
   return json;
 }
 

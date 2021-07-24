@@ -5,17 +5,6 @@ let Dictionary = JSON.parse(localStorage.getItem('ItemTagDic'));
 let Tags = JSON.parse(localStorage.getItem('TagIdDic'));
 let ItemNames;
 
-function GetCollection_json(callback){
-  fetch('./items/' + CollectionName + '.json').then(function(response) {
-    return response.json();
-  }).then(function(json){
-    Collection = json;
-    if(callback != undefined) callback();
-  }).catch(function(error){
-    alert('Lost the way to your save house :(( \n' + error); // TEMP: need to display error directly in the web instead with a nice way like discord.
-  });
-}
-
 /**
  * args are the tags would like to include.
  * Each tag is a bit mask, only one bit will be 1, others are all 0.
@@ -84,8 +73,9 @@ async function GetItems_json(item_names){
 Collection = GetItem_json(CollectionName);
 window.onload = () => document.getElementById('cl_name').innerHTML = CollectionName
 
-ItemNames = ItemsWithTags('articles');
+// Test only.
 // 'articles' should be replaced by resolve(Collection['rules'])
+ItemNames = ItemsWithTags('articles');
 
 GetItems_json(ItemNames);
 
