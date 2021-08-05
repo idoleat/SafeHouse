@@ -6,5 +6,6 @@
   "OTHERS3": 16,
   "articles": 32,
   "thoughts": 64,
-  "story": 128
+  "story": 128,
+  "homepage": 256
 }
