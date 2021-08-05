@@ -1,5 +1,6 @@
 let Parameters = new URLSearchParams(document.location.search);
 let CollectionName = Parameters.get('cl'); // Only the first occurence will be returned
+if (CollectionName == null) CollectionName = 'HOMEPAGE';
 let Collection;
 let Dictionary = JSON.parse(localStorage.getItem('ItemTagDic'));
 let Tags = JSON.parse(localStorage.getItem('TagIdDic'));
@@ -41,7 +42,7 @@ function ItemsWithTags(){
   return items;
 }
 
-function FillRack_(items){
+function FillRack(items){
   items.forEach((item) => {
     // use includes() to check it's collectoin or widget temperorily
     // If an item has encoded itags stored, we can use & for faster checking
@@ -66,20 +67,26 @@ async function GetItems_json(item_names){
   for(let i=0; i<item_names.length; i++){
     items.push(await GetItem_json(item_names[i]));
   }
-  FillRack_(items);
+  FillRack(items);
   return items;
 }
+/*
+ * TODO: need to be done before next step
+ * TODO: Don't need to get everytime load a collection
+ */
 
+GetItemTagDictionary();
+GetTagIdDictionary();
+
+// homepage?
 Collection = GetItem_json(CollectionName);
+// homepage?
 window.onload = () => document.getElementById('cl_name').innerHTML = CollectionName
 
 // Test only.
 // 'articles' should be replaced by resolve(Collection['rules'])
 ItemNames = ItemsWithTags('articles');
 
-GetItems_json(ItemNames);
+console.log(GetItems_json(ItemNames));
 
-
-//TODO: check if it's coming from homepage or not to determine fetching again or not
 //TODO: Automatic dictionaries generation
-//TODO: Fill the rack

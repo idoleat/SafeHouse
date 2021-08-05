@@ -26,7 +26,7 @@ function addCollection(name, content){
   const newCollection = document.createElement('a');
   newCollection.className = 'card collection';
   /*pre process name*/
-  newCollection.setAttribute('href', './Collection.html?cl=' + name);
+  newCollection.setAttribute('href', './?cl=' + name);
 
   // I don't know it should be header or what so I use div.
   const collectionName = document.createElement('div');
@@ -61,22 +61,6 @@ function addItem(name, content){
   document.getElementById('rack').append(newItem);
 }
 
-// deprecated
-function FillRack(setup){
-  for(let key in setup){
-    let value = setup[key];
-    if(value['type'] === 'widget'){
-      addWidget(key, value['content']);
-    }
-    else if(value['type'] === 'collection'){
-      addCollection(key, value['content']);
-    }
-    else if(value['type'] === 'item'){
-      addItem(key, value['content']);
-    }
-  }
-}
-
 function GetHomepageSetup(cb_FillRack){
   fetch("./HomepageSetup.json").then(function(response) {
     return response.json();
@@ -98,8 +82,8 @@ function GetHomepageSetup(cb_FillRack){
 async function GetItem_json(JsonName, callback){
   const response = await fetch('./items/' + JsonName + '.json');
   if(!response.ok){
-    alert('Lost the way to your save house :(( \n' + error);
-    throw new Error('error while fetching');
+    alert('Can not find ' + JsonName + '.json');
+    //throw new Error('error while fetching');
   }
   const json = await response.json();
   if(callback !== undefined) callback(json);
@@ -125,24 +109,5 @@ function GetTagIdDictionary(){
   }).catch(function(error){
     alert('Got errors while getting TagIdDic.json');
     // TEMP: need to display error directly in the web instead with a nice way like discord.
-  });
-}
-
-/* Not allowed on most static web host.
- */
-function SetHomepageSetup(){
-  fetch('./HomepageSetup.json', {
-    method: 'POST', // or 'PUT'
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(HomepageSetup),
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success storing homepage setup:', data);
-  })
-  .catch((error) => {
-    console.error('Error storing homepage setup:', error);
   });
 }
