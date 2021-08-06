@@ -71,7 +71,7 @@ async function GetItems_json(item_names){
   return items;
 }
 /*
- * TODO: need to be done before next step
+ * TODO: need to be done before next step. Make it a module along side with essential.js and use TLA
  * TODO: Don't need to get everytime load a collection
  */
 
@@ -87,6 +87,9 @@ window.onload = () => document.getElementById('cl_name').innerHTML = CollectionN
 // 'articles' should be replaced by resolve(Collection['rules'])
 ItemNames = ItemsWithTags('articles');
 
-console.log(GetItems_json(ItemNames));
+// Make GetItems_json() into module as well, so we can
+// FillRack(await GetItems_json(ItemNames));
+GetItems_json(ItemNames);
 
 //TODO: Automatic dictionaries generation
+//TODO: Apply defalt collection style if it's not on homepge
