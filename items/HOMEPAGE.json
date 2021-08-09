@@ -1,11 +1,18 @@
 {
   "tags": ["CL", "homepage"],
-  "name": "EP1",
+  "name": "HOMEPAGE",
   "date": "",
-  "content": "homepage description",
+  "content": "本站使用 <a href=\"https://github.com/idoleat/SaveHouse\">SaveHouse<\/a> 建置，奇奇怪怪的內容正在陸陸續續添加中嘻嘻。SaveHouse 還有很多功能還沒做好啦 &gt; &lt; 歡迎一起來幫忙 ヽ(●´∀`●)ﾉ (下面的卡片都是可以點的歐)(抱歉了手機我還沒處理好手機上的字體縮放他真的很不聽話 ╮(╯_╰)╭ 螢幕先轉成橫的可能會好一些)",
   "resources": [],
   "extra": {
     "styles": "",
-    "order": "costum"
+    "order": "costum",
+    "rules": {
+      "include_tags": [],
+      "exclude_tags": [],
+      "include_items": [""],
+      "include_ItemID": [],
+      "excluse_ItemID": []
+    }
   }
 }

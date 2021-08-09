@@ -49,8 +49,9 @@ function ItemsWithTags(){
 Dictionary = await GetItem_json('../ItemTagDic');
 Tags = await GetItem_json('../TagIdDic');
 
-Collection = GetItem_json(CollectionName);
-window.onload = () => document.getElementById('cl_name').innerHTML = CollectionName
+Collection = await GetItem_json(CollectionName);
+document.getElementById('cl_name').innerHTML = CollectionName;
+document.getElementById('cl_description').innerHTML = Collection['content'];
 
 // Test only.
 // 'articles' should be replaced by resolve(Collection['rules'])

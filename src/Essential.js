@@ -94,6 +94,11 @@ async function GetItems_json(item_names, callback){
   return items;
 }
 
+/**
+ * [FillRack description]
+ * @param       {array} items  Js objects of items to be filled into the rack.
+ * @constructor
+ */
 function FillRack(items){
   items.forEach((item) => {
     // use includes() to check it's collectoin or widget temperorily
