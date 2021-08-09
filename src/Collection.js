@@ -1,9 +1,11 @@
+import {GetItem_json, GetItems_json, FillRack} from './Essential.js';
+
 let Parameters = new URLSearchParams(document.location.search);
 let CollectionName = Parameters.get('cl'); // Only the first occurence will be returned
 if (CollectionName == null) CollectionName = 'HOMEPAGE';
 let Collection;
-let Dictionary = JSON.parse(localStorage.getItem('ItemTagDic'));
-let Tags = JSON.parse(localStorage.getItem('TagIdDic'));
+let Dictionary;
+let Tags = ['test'];
 let ItemNames;
 
 /**
@@ -42,54 +44,19 @@ function ItemsWithTags(){
   return items;
 }
 
-function FillRack(items){
-  items.forEach((item) => {
-    // use includes() to check it's collectoin or widget temperorily
-    // If an item has encoded itags stored, we can use & for faster checking
-    if(item['tags'].includes('CL')){
-      addCollection(item['name'], item['content']);
-    }
-    else if(item['tags'].includes('WIDGET')){
-      addWidget(item['name'], item['content']);
-    }
-    else{
-      addItem(item['name'], item['content']);
-    }
-  });
-}
-/**
- * [GetItemJson description]
- * @param       {array} item_names [description]
- * @constructor
- */
-async function GetItems_json(item_names){
-  let items = [];
-  for(let i=0; i<item_names.length; i++){
-    items.push(await GetItem_json(item_names[i]));
-  }
-  FillRack(items);
-  return items;
-}
-/*
- * TODO: need to be done before next step. Make it a module along side with essential.js and use TLA
- * TODO: Don't need to get everytime load a collection
- */
+// not sure whether if-modified-since is in the request header by default on every modern browser or not
+// An hacky way to use GetItem_json().
+Dictionary = await GetItem_json('../ItemTagDic');
+Tags = await GetItem_json('../TagIdDic');
 
-GetItemTagDictionary();
-GetTagIdDictionary();
-
-// homepage?
 Collection = GetItem_json(CollectionName);
-// homepage?
 window.onload = () => document.getElementById('cl_name').innerHTML = CollectionName
 
 // Test only.
 // 'articles' should be replaced by resolve(Collection['rules'])
 ItemNames = ItemsWithTags('articles');
 
-// Make GetItems_json() into module as well, so we can
-// FillRack(await GetItems_json(ItemNames));
-GetItems_json(ItemNames);
+FillRack(await GetItems_json(ItemNames));
 
 //TODO: Automatic dictionaries generation
 //TODO: Apply defalt collection style if it's not on homepge
