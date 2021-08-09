@@ -13,11 +13,11 @@ let ItemNames;
  * Each tag is a bit mask, only one bit will be 1, others are all 0.
  * So a filter consist of several tags are the combination masks.
  * This function shouldn't be called directly. This is a helper function and should be called in functions with args passed. (Not sure if this is a good design)
- * @param {aruguments} args The arguments abjects containing variable length of arguments, which are all (string)tags.
+ * @param {array} tags An array of (string)tags to include or exclude.
  */
-function TagID(args){
+function TagID(tags){
   let TagNum = 0;
-   Array.from(args).forEach( (tag)=> {
+   tags.forEach( (tag)=> {
      TagNum += parseInt(Tags[tag]);
    });
   return TagNum;
@@ -28,11 +28,13 @@ function TagID(args){
  * It will iterate through all the items.
  * Improvements needed: Maybe store ItemTagDic sorted(or B-Tree like DB) to perform faster comparism.
  *
+ * @param {array} ArrayOfTags An array of tags to include or exclude.
+ *
  * @returns An string array of items' name
  */
-function ItemsWithTags(){
+function ItemsWithTags(ArrayOfTags){
   let items = [];
-  let tags = TagID(arguments);
+  let tags = TagID(ArrayOfTags);
 
   for(let key in Dictionary){
     let value = parseInt(Dictionary[key]);
@@ -42,6 +44,29 @@ function ItemsWithTags(){
   }
 
   return items;
+}
+
+function ResolveRules(rules){
+  let names = [];
+  const push_item_names = (item_name) => {
+    names.push(item_name);
+  }
+  // include tags
+  ItemsWithTags(rules['include_tags']).forEach(push_item_names);
+
+  // exclude tags
+  // names.
+
+  // include items
+  rules['include_items'].forEach(push_item_names);
+
+  // exclude items
+
+  // include item ID
+
+  // exclude item ID
+
+  return names;
 }
 
 // not sure whether if-modified-since is in the request header by default on every modern browser or not
@@ -55,7 +80,8 @@ document.getElementById('cl_description').innerHTML = Collection['content'];
 
 // Test only.
 // 'articles' should be replaced by resolve(Collection['rules'])
-ItemNames = ItemsWithTags('articles');
+//ItemNames = ItemsWithTags('articles');
+ItemNames = ResolveRules(Collection['extra']['rules']);
 
 FillRack(await GetItems_json(ItemNames));
 

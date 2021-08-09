@@ -1,0 +1,15 @@
+{
+  "tags": ["CL"],
+  "name": "test",
+  "ID": "",
+  "date": "",
+  "content": "just contentawe fawef ",
+  "resources": [],
+  "extra": {
+    "style": [
+      "5px",
+      "ffffff80",
+      [[1,1], [3,1]]
+    ]
+  }
+}

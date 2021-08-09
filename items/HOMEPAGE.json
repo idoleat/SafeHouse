@@ -8,9 +8,10 @@
     "styles": "",
     "order": "costum",
     "rules": {
-      "include_tags": [],
+      "include_tags": ["articles"],
       "exclude_tags": [],
-      "include_items": [""],
+      "include_items": ["Bio", "Sad stories", "pinned item", "test", "測試", "pinned item2", "Today's Weather", "pinned item4", "pinned item5", "pinned item6"],
+      "exclude_items": [],
       "include_ItemID": [],
       "excluse_ItemID": []
     }
