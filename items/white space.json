@@ -1,0 +1,11 @@
+{
+  "tags": ["articles", "CL"],
+  "name": "white space",
+  "date": "2020-10-10",
+  "content": "testing white space in name",
+  "resources": [],
+  "extra": {
+    "rules": ["include cl_my-stories"],
+    "styles": ""
+  }
+}

@@ -1,31 +1,23 @@
+import {GetItem_json, GetItems_json, FillRack} from './Essential.js';
+
 let Parameters = new URLSearchParams(document.location.search);
 let CollectionName = Parameters.get('cl'); // Only the first occurence will be returned
+if (CollectionName == null) CollectionName = 'HOMEPAGE';
 let Collection;
-let Dictionary = JSON.parse(localStorage.getItem('ItemTagDic'));
-let Tags = JSON.parse(localStorage.getItem('TagIdDic'));
-let Items;
-
-function GetCollection_json(callback){
-  fetch('./items/' + CollectionName + '.json').then(function(response) {
-    return response.json();
-  }).then(function(json){
-    Collection = json;
-    if(callback != undefined) callback();
-  }).catch(function(error){
-    alert('Lost the way to your save house :(( \n' + error); // TEMP: need to display error directly in the web instead with a nice way like discord.
-  });
-}
+let Dictionary;
+let Tags = ['test'];
+let ItemNames;
 
 /**
  * args are the tags would like to include.
  * Each tag is a bit mask, only one bit will be 1, others are all 0.
  * So a filter consist of several tags are the combination masks.
  * This function shouldn't be called directly. This is a helper function and should be called in functions with args passed. (Not sure if this is a good design)
- * @param {aruguments} args The arguments abjects containing variable length of arguments, which are all (string)tags.
+ * @param {array} tags An array of (string)tags to include or exclude.
  */
-function TagID(args){
+function TagID(tags){
   let TagNum = 0;
-   Array.from(args).forEach( (tag)=> {
+   tags.forEach( (tag)=> {
      TagNum += parseInt(Tags[tag]);
    });
   return TagNum;
@@ -36,11 +28,13 @@ function TagID(args){
  * It will iterate through all the items.
  * Improvements needed: Maybe store ItemTagDic sorted(or B-Tree like DB) to perform faster comparism.
  *
+ * @param {array} ArrayOfTags An array of tags to include or exclude.
+ *
  * @returns An string array of items' name
  */
-function FilterWithTags(){
+function ItemsWithTags(ArrayOfTags){
   let items = [];
-  let tags = TagID(arguments);
+  let tags = TagID(ArrayOfTags);
 
   for(let key in Dictionary){
     let value = parseInt(Dictionary[key]);
@@ -52,12 +46,44 @@ function FilterWithTags(){
   return items;
 }
 
-GetCollection_json();
-window.onload = () => document.getElementById('cl_name').innerHTML = CollectionName
+function ResolveRules(rules){
+  let names = [];
+  const push_item_names = (item_name) => {
+    names.push(item_name);
+  }
+  // include tags
+  ItemsWithTags(rules['include_tags']).forEach(push_item_names);
 
-Items = FilterWithTags("articles");
-console.log(Items);
+  // exclude tags
+  // names.
 
-//TODO: check if it's coming from homepage or not to determine fetching again or not
+  // include items
+  rules['include_items'].forEach(push_item_names);
+
+  // exclude items
+
+  // include item ID
+
+  // exclude item ID
+
+  return names;
+}
+
+// not sure whether if-modified-since is in the request header by default on every modern browser or not
+// An hacky way to use GetItem_json().
+Dictionary = await GetItem_json('../ItemTagDic');
+Tags = await GetItem_json('../TagIdDic');
+
+Collection = await GetItem_json(CollectionName);
+document.getElementById('cl_name').innerHTML = CollectionName;
+document.getElementById('cl_description').innerHTML = Collection['content'];
+
+// Test only.
+// 'articles' should be replaced by resolve(Collection['rules'])
+//ItemNames = ItemsWithTags('articles');
+ItemNames = ResolveRules(Collection['extra']['rules']);
+
+FillRack(await GetItems_json(ItemNames));
+
 //TODO: Automatic dictionaries generation
-//TODO: Fill the rack
+//TODO: Apply defalt collection style if it's not on homepge

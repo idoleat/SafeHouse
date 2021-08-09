@@ -1,6 +1,7 @@
 /* The common and basic functions and variables.
- * Import this script as a library.
- * Collection.js and index.js need this.
+ * Import this script as a JavaScript module.
+ * Collection.js need this.
+ * Not saved as .mjs because not every web server is configured right.
  */
 
 function addWidget(name, content){
@@ -22,11 +23,11 @@ function addWidget(name, content){
   document.getElementById('rack').append(newWidget);
 }
 
-function addPinnedCollection(name, content){
+function addCollection(name, content){
   const newCollection = document.createElement('a');
   newCollection.className = 'card collection';
   /*pre process name*/
-  newCollection.setAttribute('href', './Collection.html?cl=' + name);
+  newCollection.setAttribute('href', './?cl=' + name);
 
   // I don't know it should be header or what so I use div.
   const collectionName = document.createElement('div');
@@ -42,7 +43,7 @@ function addPinnedCollection(name, content){
   document.getElementById('rack').append(newCollection);
 }
 
-function addPinnedItem(name, content){
+function addItem(name, content){
   const newItem = document.createElement('a');
   newItem.className = 'card item';
   newItem.setAttribute('href', '#');
@@ -61,82 +62,57 @@ function addPinnedItem(name, content){
   document.getElementById('rack').append(newItem);
 }
 
-function FillRack(setup){
-  for(let key in setup){
-    let value = setup[key];
-    if(value['type'] === 'widget'){
-      addWidget(key, value['content']);
-    }
-    else if(value['type'] === 'collection'){
-      addPinnedCollection(key, value['content']);
-    }
-    else if(value['type'] === 'item'){
-      addPinnedItem(key, value['content']);
-    }
-  }
-}
-
-function GetHomepageSetup(cb_FillRack){
-  fetch("./HomepageSetup.json").then(function(response) {
-    return response.json();
-  }).then(function(json){
-    HomepageSetup = json;
-    if(cb_FillRack != undefined) cb_FillRack(HomepageSetup);
-  }).catch(function(error){
-    alert('Lost the way to your save house :(( \n' + error);
-    // TEMP: need to display error directly in the web instead with a nice way like discord.
-  });
-}
-
-function GetJson(JsonName, callback){
-  fetch('./' + JsonName + '.json').then(function(response) {
-    return response.json();
-  }).then(function(json){
-    if(callback != undefined) callback(adapter);
-    return json;
-  }).catch(function(error){
-    alert('Lost the way to your save house :(( \n' + error);
-    // TEMP: need to display error directly in the web instead with a nice way like discord.
-  });
-}
-
-function GetItemTagDictionary(){
-  fetch("./ItemTagDic.json").then(function(response) {
-      return response.text();
-  }).then(function(json){
-    localStorage.setItem('ItemTagDic', json);
-  }).catch(function(error){
-    alert('Got errors while getting ItemTagDic.json');
-    // TEMP: need to display error directly in the web instead with a nice way like discord.
-  });
-}
-
-function GetTagIdDictionary(){
-  fetch("./TagIdDic.json").then(function(response) {
-      return response.text();
-  }).then(function(json){
-    localStorage.setItem('TagIdDic', json);
-  }).catch(function(error){
-    alert('Got errors while getting TagIdDic.json');
-    // TEMP: need to display error directly in the web instead with a nice way like discord.
-  });
-}
-
-/* Not allowed on most static web host.
+/**
+ * Get a item asyncronously under '/item' durectory. Pass relative pass in to access items in other location.
+ * @param       {string}   JsonName File name, without .json
+ * @param       {Function} callback Functions to call after getting the item successfully. Json as Js object will be passed as the only argumemt.
+ * @returns Js object of the item.
  */
-function SetHomepageSetup(){
-  fetch('./HomepageSetup.json', {
-    method: 'POST', // or 'PUT'
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(HomepageSetup),
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success storing homepage setup:', data);
-  })
-  .catch((error) => {
-    console.error('Error storing homepage setup:', error);
+async function GetItem_json(JsonName, callback){
+  const response = await fetch(`./items/${JsonName}.json`);
+  if(!response.ok){
+    alert(`Can not find ${JsonName}.json`);
+    //throw new Error('error while fetching');
+  }
+  const json = await response.json();
+  if(callback !== undefined) callback(json);
+  return json;
+}
+
+/**
+ * Use GetItem_json() to get multiple items as an array.
+ * @param       {array} item_names Files names, without .json
+ * @constructor
+ */
+async function GetItems_json(item_names, callback){
+  let items = [];
+  // I don't know what's the best way to itterate through an array so I use for loop.
+  for(let i=0; i<item_names.length; i++){
+    items.push(await GetItem_json(item_names[i]));
+  }
+  if(callback !== undefined) callback(json);
+  return items;
+}
+
+/**
+ * [FillRack description]
+ * @param       {array} items  Js objects of items to be filled into the rack.
+ * @constructor
+ */
+function FillRack(items){
+  items.forEach((item) => {
+    // use includes() to check it's collectoin or widget temperorily
+    // If an item has encoded itags stored, we can use & for faster checking
+    if(item['tags'].includes('CL')){
+      addCollection(item['name'], item['content']);
+    }
+    else if(item['tags'].includes('WIDGET')){
+      addWidget(item['name'], item['content']);
+    }
+    else{
+      addItem(item['name'], item['content']);
+    }
   });
 }
+
+export {addWidget, addCollection, addItem, GetItem_json, GetItems_json, FillRack};
