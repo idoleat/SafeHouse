@@ -1,58 +1,63 @@
-import {GetItem_json, GetItems_json, FillRack} from './Essential.js';
+import { GetItem_json, GetItems_json, FillRack } from './Essential.js';
 
 let Parameters = new URLSearchParams(document.location.search);
 let CollectionName = Parameters.get('cl'); // Only the first occurence will be returned
 if (CollectionName == null) CollectionName = 'HOMEPAGE';
 let Collection;
-let Dictionary;
-let Tags = ['test'];
+let ItemTagDic;
+let TagIdDic;
 let ItemNames;
 
 /**
- * args are the tags would like to include.
- * Each tag is a bit mask, only one bit will be 1, others are all 0.
- * So a filter consist of several tags are the combination masks.
- * This function shouldn't be called directly. This is a helper function and should be called in functions with args passed. (Not sure if this is a good design)
- * @param {array} tags An array of (string)tags to include or exclude.
- */
-function TagID(tags){
-  let TagNum = 0;
-   tags.forEach( (tag)=> {
-     TagNum += parseInt(Tags[tag]);
-   });
-  return TagNum;
-}
-
-/**
- * Filtering out items which contain specific tags.
+ * Filtering out items which include and exclude specific tags.
  * It will iterate through all the items.
- * Improvements needed: Maybe store ItemTagDic sorted(or B-Tree like DB) to perform faster comparism.
  *
- * @param {array} ArrayOfTags An array of tags to include or exclude.
+ * @param {array} include An array of tags to include
+ * @param {array} exclude An array of tags to exclude
  *
  * @returns An string array of items' name
  */
-function ItemsWithTags(ArrayOfTags){
+function ItemsWithTags(include, exclude) {
   let items = [];
-  let tags = TagID(ArrayOfTags);
+  let tagBitMask = 0;
 
-  for(let key in Dictionary){
-    let value = parseInt(Dictionary[key]);
-    if((value&tags) !== 0){
-      items.push(key);
+  /* Each tag is a bit mask, only one bit will be 1, others are all 0.
+   * Look up the corresponding bit mask of a certain tag by looking up TagIdDic.json
+   * Combine all the bit masks to get the final bit mask to filter out items in the next step.
+   */
+  include.forEach((tag) => {
+    tagBitMask += parseInt(TagIdDic[tag]);
+  });
+  exclude.forEach((tag) => {
+    tagBitMask -= parseInt(TagIdDic[tag])
+  });
+
+  /* Linear search through all items.
+   * Improvements needed: Maybe store ItemTagDic sorted(or B-Tree just like DB or hierachical)
+   * to perform faster filtering.
+   */
+  for (let itemName in ItemTagDic) {
+    let tagValue = parseInt(ItemTagDic[itemName]);
+    if ((tagValue & tagBitMask) !== 0) {
+      items.push(itemName);
     }
   }
 
   return items;
 }
 
-function ResolveRules(rules){
+/**
+ * [ResolveRules description]
+ * @param       {[type]} rules  [description]
+ * @constructor
+ */
+function ResolveRules(rules) {
   let names = [];
   const push_item_names = (item_name) => {
     names.push(item_name);
   }
   // include tags
-  ItemsWithTags(rules['include_tags']).forEach(push_item_names);
+  ItemsWithTags(rules['include_tags'], rules['exclude_tags']).forEach(push_item_names);
 
   // exclude tags
   // names.
@@ -71,19 +76,24 @@ function ResolveRules(rules){
 
 // not sure whether if-modified-since is in the request header by default on every modern browser or not
 // An hacky way to use GetItem_json().
-Dictionary = await GetItem_json('../ItemTagDic');
-Tags = await GetItem_json('../TagIdDic');
+ItemTagDic = await GetItem_json('../ItemTagDic');
+TagIdDic = await GetItem_json('../TagIdDic');
 
 Collection = await GetItem_json(CollectionName);
 document.getElementById('cl_name').innerHTML = CollectionName;
 document.getElementById('cl_description').innerHTML = Collection['content'];
 
-// Test only.
-// 'articles' should be replaced by resolve(Collection['rules'])
-//ItemNames = ItemsWithTags('articles');
 ItemNames = ResolveRules(Collection['extra']['rules']);
 
 FillRack(await GetItems_json(ItemNames));
 
 //TODO: Automatic dictionaries generation
 //TODO: Apply defalt collection style if it's not on homepge
+
+//problem: ItemTagDic file too larg
+//* Hierarchical dictionary files
+//* Dynamic dictionary files tree like MD pool of Ceph
+//* Use sqlite-httpvfs (ref: Linux conf au talk- database as filesystem
+//*
+
+ // Slow load time: can we fetch all the file at once? Fetch with html? The overhead of establishing connection is too much
