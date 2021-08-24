@@ -25,12 +25,12 @@ function ItemsWithTags(include, exclude) {
    * Look up the corresponding bit mask of a certain tag by looking up TagIdDic.json
    * Combine all the bit masks to get the final bit mask to filter out items in the next step.
    */
-  include.forEach((tag) => {
+  for(let tag in include){
     tagBitMask += parseInt(TagIdDic[tag]);
-  });
-  exclude.forEach((tag) => {
-    tagBitMask -= parseInt(TagIdDic[tag])
-  });
+  }
+  for(let tag in exclude){
+    tagBitMask -= parseInt(TagIdDic[tag]);
+  }
 
   /* Linear search through all items.
    * Improvements needed: Maybe store ItemTagDic sorted(or B-Tree just like DB or hierachical)
