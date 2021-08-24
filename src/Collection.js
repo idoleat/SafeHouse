@@ -86,6 +86,7 @@ document.getElementById('cl_description').innerHTML = Collection['content'];
 ItemNames = ResolveRules(Collection['extra']['rules']);
 
 FillRack(await GetItems_json(ItemNames));
+document.getElementById('loader').remove();
 
 //TODO: Automatic dictionaries generation
 //TODO: Apply defalt collection style if it's not on homepge
