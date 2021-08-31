@@ -1,8 +1,8 @@
-import { GetItem_json, GetItems_json, FillRack } from './Essential.js';
+import { FillRack, GetItem_json, GetItems_json } from "./Essential.js";
 
 let Parameters = new URLSearchParams(document.location.search);
-let CollectionName = Parameters.get('cl'); // Only the first occurence will be returned
-if (CollectionName == null) CollectionName = 'HOMEPAGE';
+let CollectionName = Parameters.get("cl"); // Only the first occurence will be returned
+if (CollectionName == null) CollectionName = "HOMEPAGE";
 let Collection;
 let ItemTagDic;
 let TagIdDic;
@@ -25,11 +25,13 @@ function ItemsWithTags(include, exclude) {
    * Look up the corresponding bit mask of a certain tag by looking up TagIdDic.json
    * Combine all the bit masks to get the final bit mask to filter out items in the next step.
    */
-  for(let tag in include){
-    tagBitMask += parseInt(TagIdDic[tag]);
+  for (let i = 0; i < include.length; i++) {
+    let mask = TagIdDic[include[i]]; // How about bad TagIdDic cause mask a NaN?
+    if (mask) tagBitMask += mask;
   }
-  for(let tag in exclude){
-    tagBitMask -= parseInt(TagIdDic[tag]);
+  for (let i = 0; i < exclude.length; i++) {
+    let mask = TagIdDic[exclude[i]];
+    if (mask) tagBitMask -= mask;
   }
 
   /* Linear search through all items.
@@ -37,7 +39,7 @@ function ItemsWithTags(include, exclude) {
    * to perform faster filtering.
    */
   for (let itemName in ItemTagDic) {
-    let tagValue = parseInt(ItemTagDic[itemName]);
+    let tagValue = ItemTagDic[itemName];
     if ((tagValue & tagBitMask) !== 0) {
       items.push(itemName);
     }
@@ -55,15 +57,14 @@ function ResolveRules(rules) {
   let names = [];
   const push_item_names = (item_name) => {
     names.push(item_name);
-  }
+  };
   // include tags
-  ItemsWithTags(rules['include_tags'], rules['exclude_tags']).forEach(push_item_names);
-
-  // exclude tags
-  // names.
+  ItemsWithTags(rules["include_tags"], rules["exclude_tags"]).forEach(
+    push_item_names,
+  );
 
   // include items
-  rules['include_items'].forEach(push_item_names);
+  rules["include_items"].forEach(push_item_names);
 
   // exclude items
 
@@ -76,17 +77,17 @@ function ResolveRules(rules) {
 
 // not sure whether if-modified-since is in the request header by default on every modern browser or not
 // An hacky way to use GetItem_json().
-ItemTagDic = await GetItem_json('../ItemTagDic');
-TagIdDic = await GetItem_json('../TagIdDic');
+ItemTagDic = await GetItem_json("../ItemTagDic");
+TagIdDic = await GetItem_json("../TagIdDic");
 
 Collection = await GetItem_json(CollectionName);
-document.getElementById('cl_name').innerHTML = CollectionName;
-document.getElementById('cl_description').innerHTML = Collection['content'];
+document.getElementById("cl_name").innerHTML = CollectionName;
+document.getElementById("cl_description").innerHTML = Collection["content"];
 
-ItemNames = ResolveRules(Collection['extra']['rules']);
+ItemNames = ResolveRules(Collection["extra"]["rules"]);
 
 FillRack(await GetItems_json(ItemNames));
-document.getElementById('loader').remove();
+document.getElementById("loader").remove();
 
 //TODO: Automatic dictionaries generation
 //TODO: Apply defalt collection style if it's not on homepge
@@ -97,4 +98,4 @@ document.getElementById('loader').remove();
 //* Use sqlite-httpvfs (ref: Linux conf au talk- database as filesystem
 //*
 
- // Slow load time: can we fetch all the file at once? Fetch with html? The overhead of establishing connection is too much
+// Slow load time: can we fetch all the file at once? Fetch with html? The overhead of establishing connection is too much
