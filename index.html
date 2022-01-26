@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="./styles/loader.css">
   <script type="module" src="./src/Essential.js"></script>
   <script type="module" src="./src/Collection.js"></script>
+  <script type="text/javascript" src="./src/Editor.js"></script>
   <title>Save House</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
     <div class="dropdown">
       <div class="greetings">Hi, bitch</div>
       <a href="#">Add card</a>
-      <a href="#">Add item</a>
+      <a href="#" onclick="OpenEditor()">Add item</a>
       <a href="#">Add collection</a>
     </div>
   </div>
@@ -34,5 +35,11 @@
       <span class="loader-block"></span>
       <span class="loader-block"></span>
     </div>
+  </div>
+  <div class="Editor Editor-disabled" id="editor">
+      <div class="Editor-window Editor-disabled" id="editor-window">
+          <div class="Editor-close-btn Editor-disabled" id="editor-close-btn" onclick="CloseEditor()">
+          </div>
+      </div>
   </div>
 </body>
