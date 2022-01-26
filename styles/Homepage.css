@@ -163,8 +163,8 @@ a, a:visited {
     top: 0;
     left: 0;
     display: grid;
-    grid-template-columns: 1fr 5fr 1fr;
-    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-columns: 1fr 10fr 1fr;
+    grid-template-rows: 1fr 10fr 1fr;
     background: rgba(0,0,0,0.3);
     transition: background 0.2s ease-in;
 }
@@ -188,6 +188,13 @@ a, a:visited {
     border-radius: 50%;
     left: 10px;
     top: 10px;
+}
+
+.Editor-bg {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 4;
 }
 
 .Editor-disabled {
