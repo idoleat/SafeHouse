@@ -12,10 +12,12 @@ function addWidget(name, content){
   // I don't know it should be header or what so I use div.
   const widgetName = document.createElement('div');
   widgetName.innerHTML = name;
+  widgetName.className = 'name';
   const seperator = document.createElement('div');
   seperator.className = 'seperator';
   const widgetContent = document.createElement('div');
   widgetContent.innerHTML = content;
+  widgetContent.className = 'content';
 
   newWidget.append(widgetName);
   newWidget.append(seperator);
@@ -32,10 +34,12 @@ function addCollection(name, content){
   // I don't know it should be header or what so I use div.
   const collectionName = document.createElement('div');
   collectionName.innerHTML = name;
+  collectionName.className = 'name';
   const seperator = document.createElement('div');
   seperator.className = 'seperator';
   const collectionContent = document.createElement('div');
   collectionContent.innerHTML = content;
+  collectionContent.className = 'content';
 
   newCollection.append(collectionName);
   newCollection.append(seperator);
@@ -51,10 +55,12 @@ function addItem(name, content){
   // I don't know it should be header or what so I use div.
   const itemName = document.createElement('div');
   itemName.innerHTML = name;
+  itemName.className = 'name';
   const seperator = document.createElement('div');
   seperator.className = 'seperator';
   const itemContent = document.createElement('div');
   itemContent.innerHTML = content;
+  itemContent.className = 'content';
 
   newItem.append(itemName);
   newItem.append(seperator);
